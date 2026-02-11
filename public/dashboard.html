@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Dashboard Sekolah</title>
+<title>Dashboard Database Sekolah</title>
 
 <style>
 body{
     font-family:Arial;
     padding:40px;
 }
+
 .card{
     background:#0a1f44;
     color:white;
@@ -20,7 +21,8 @@ body{
 
 <body>
 
-<h1>Dashboard Sekolah</h1>
+<h1>Dashboard Database Sekolah</h1>
+<h3 id="welcome"></h3>
 
 <div class="card">Total Siswa: 653</div>
 <div class="card">Total Guru: 108</div>
@@ -29,7 +31,19 @@ body{
 <button onclick="logout()">Logout</button>
 
 <script>
+
+// Cek apakah sudah login
+if(localStorage.getItem("isLogin") !== "true"){
+    window.location.href="index.html";
+}
+
+// Tampilkan username
+const user = JSON.parse(localStorage.getItem("user"));
+document.getElementById("welcome").innerText =
+    "Selamat datang, " + user.username;
+
 function logout(){
+    localStorage.removeItem("isLogin");
     window.location.href="index.html";
 }
 </script>
