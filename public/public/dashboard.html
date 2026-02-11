@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Dashboard</title>
+</head>
+<body>
+
+<h2>Dashboard Sekolah</h2>
+
+<div id="data"></div>
+
+<script>
+async function loadData() {
+
+  const token = localStorage.getItem("token");
+
+  const res = await fetch("/api/stats", {
+    headers: {
+      Authorization: "Bearer " + token
+    }
+  });
+
+  const data = await res.json();
+
+  document.getElementById("data").innerHTML =
+    "Total Siswa: " + data.total_students + "<br>" +
+    "Total Guru: " + data.total_teachers + "<br>" +
+    "Total Pengurus: " + data.total_staff;
+}
+
+loadData();
+</script>
+
+</body>
+</html>
