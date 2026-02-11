@@ -1,35 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Dashboard</title>
+<title>Enterprise School System</title>
 </head>
 <body>
+<h2>Login</h2>
 
-<h2>Dashboard Sekolah</h2>
+<input id="username" placeholder="Username"><br><br>
+<input id="password" type="password" placeholder="Password"><br><br>
+<button onclick="login()">Login</button>
 
-<div id="data"></div>
+<h3 id="result"></h3>
 
 <script>
-async function loadData() {
+async function login() {
+  const res = await fetch("http://localhost:3000/api/auth/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      username: document.getElementById("username").value,
+      password: document.getElementById("password").value
+    })
+  })
 
-  const token = localStorage.getItem("token");
+  const data = await res.json()
 
-  const res = await fetch("/api/stats", {
-    headers: {
-      Authorization: "Bearer " + token
-    }
-  });
-
-  const data = await res.json();
-
-  document.getElementById("data").innerHTML =
-    "Total Siswa: " + data.total_students + "<br>" +
-    "Total Guru: " + data.total_teachers + "<br>" +
-    "Total Pengurus: " + data.total_staff;
+  if(data.token){
+    localStorage.setItem("token", data.token)
+    document.getElementById("result").innerText = "Login success!"
+  } else {
+    document.getElementById("result").innerText = "Login failed!"
+  }
 }
-
-loadData();
 </script>
-
 </body>
 </html>
