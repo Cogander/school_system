@@ -1,34 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Dashboard</title>
+<title>Dashboard Sekolah</title>
+
+<style>
+body{
+    font-family:Arial;
+    padding:40px;
+}
+.card{
+    background:#0a1f44;
+    color:white;
+    padding:20px;
+    margin:10px 0;
+    width:250px;
+}
+</style>
 </head>
+
 <body>
 
-<h2>Dashboard Sekolah</h2>
+<h1>Dashboard Sekolah</h1>
 
-<div id="data"></div>
+<div class="card">Total Siswa: 653</div>
+<div class="card">Total Guru: 108</div>
+<div class="card">Total Pengurus: 78</div>
+
+<button onclick="logout()">Logout</button>
 
 <script>
-async function loadData() {
-
-  const token = localStorage.getItem("token");
-
-  const res = await fetch("/api/stats", {
-    headers: {
-      Authorization: "Bearer " + token
-    }
-  });
-
-  const data = await res.json();
-
-  document.getElementById("data").innerHTML =
-    "Total Siswa: " + data.total_students + "<br>" +
-    "Total Guru: " + data.total_teachers + "<br>" +
-    "Total Pengurus: " + data.total_staff;
+function logout(){
+    window.location.href="index.html";
 }
-
-loadData();
 </script>
 
 </body>
