@@ -8,7 +8,7 @@
 body{
     margin:0;
     font-family:Arial;
-    background:#001f5b; /* NAVY TERANG */
+    background:#001f5b; /* navy terang */
     display:flex;
     justify-content:center;
     align-items:center;
@@ -18,7 +18,7 @@ body{
 .box{
     background:white;
     padding:40px;
-    width:300px;
+    width:320px;
     border-radius:10px;
     text-align:center;
 }
@@ -60,9 +60,18 @@ function register(){
         password: document.getElementById("password").value
     };
 
+    if(!data.username || !data.password){
+        alert("Semua field wajib diisi");
+        return;
+    }
+
+    // Simpan user
     localStorage.setItem("user", JSON.stringify(data));
 
-    alert("Registrasi berhasil!");
+    // Set status login otomatis
+    localStorage.setItem("isLogin", "true");
+
+    // Langsung masuk dashboard
     window.location.href="dashboard.html";
 }
 </script>
