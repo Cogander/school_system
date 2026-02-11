@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Register Sekolah</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:#001f5b; /* NAVY TERANG */
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.box{
+    background:white;
+    padding:40px;
+    width:300px;
+    border-radius:10px;
+    text-align:center;
+}
+
+input{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+}
+
+button{
+    width:100%;
+    padding:10px;
+    background:#001f5b;
+    color:white;
+    border:none;
+    cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+<h2>Registrasi Admin</h2>
+
+<input id="username" placeholder="Username">
+<input id="password" type="password" placeholder="Password">
+
+<button onclick="register()">Daftar</button>
+
+</div>
+
+<script>
+function register(){
+
+    const data = {
+        username: document.getElementById("username").value,
+        password: document.getElementById("password").value
+    };
+
+    localStorage.setItem("user", JSON.stringify(data));
+
+    alert("Registrasi berhasil!");
+    window.location.href="dashboard.html";
+}
+</script>
+
+</body>
+</html>
